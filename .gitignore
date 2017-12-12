@@ -3,3 +3,5 @@
 *.rbc
 /.config
 /tmp/
+.project
+.settings/
