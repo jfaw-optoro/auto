@@ -6,4 +6,7 @@ gem "site_prism"
 gem "capybara"
 gem "rspec", "~>3.4.0"
 gem 'pry'
-
+gem 'chromedriver-helper'
+gem 'syntax'
+gem 'poltergeist'
+gem 'rubocop'

@@ -2,33 +2,35 @@ require 'capybara'
 require 'capybara/cucumber'
 require 'selenium-webdriver'
 require 'site_prism'
-require 'pry'
+require 'rspec'
+require 'yaml'
+require 'capybara/poltergeist'
 
-#use chrome as default driver, later add multiple options --> cucumber.yml
-Selenium::WebDriver::Chrome.driver_path="./drivers/chromedriver"
-options = Selenium::WebDriver::Chrome::Options.new
-options.add_argument('--ignore-certificate-errors')
-options.add_argument('--disable-popup-blocking')
-options.add_argument('--disable-translate')
-driver = Selenium::WebDriver.for :chrome, options: options
+BROWSER = ENV['BROWSER'] || 'chrome'
+ENVIRONMENT_TYPE = ENV['ENVIRONMENT_TYPE'] || 'staging'
 
-url = "http://snowflake-005.stage.optiturn.com"
-#later edit url = "https://#{ENV['WHERE_TO_RUN']}/"  cucumber WHERE_TO_RUN=snowflake-005.stage.optiturn.com
-
-
-Before do |scenario|
-    # prepare db
-    driver.get("http://snowflake-005.stage.optiturn.com")
-    binding.pry
+Capybara.register_driver :selenium do |app|
+    if BROWSER.eql?('chrome')
+        Capybara::Selenium::Driver.new(app,
+                                       :browser => :chrome,
+                                       :desired_capabilities => Selenium::WebDriver::Remote::Capabilities.chrome(
+                                           'chromeOptions' => {
+                                               'args' => [ "--start-maximized" ]
+                                           }
+                                       )
+        )
+    elsif BROWSER.eql?('firefox')
+        Capybara::Selenium::Driver.new(app, :browser => :firefox)
+    elsif BROWSER.eql?('internet_explorer')
+        Capybara::Selenium::Driver.new(app, :browser => :internet_explorer)
+    elsif BROWSER.eql?('safari')
+        Capybara::Selenium::Driver.new(app, :browser => :safari)
+    elsif BROWSER.eql?('poltergeist')
+        options = { js_errors: false }
+        Capybara::Poltergeist::Driver.new(app, options)
+    end
 end
 
-After do |scenario|
-    driver.quit
-    # add screenshot for failed scenario + logging error
-end
-
-
-#initialize PageObjects
 require_relative "helpers"
 World(PageObjects)
 

@@ -1,7 +1,0 @@
-default: --profile chrome --format pretty
-
-chrome: DRIVER=chrome
-firefox: DRIVER=firefox
-
-
-#https://github.com/cucumber/cucumber/wiki/cucumber.yml
