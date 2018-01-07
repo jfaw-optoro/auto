@@ -11,7 +11,8 @@ ENVIRONMENT_TYPE = ENV['ENVIRONMENT_TYPE'] || 'staging'
 
 Capybara.register_driver :selenium do |app|
     if BROWSER.eql?('chrome')
-        Capybara::Selenium::Driver.new(app,
+        Selenium::WebDriver::Chrome.driver_path = "/Users/loaner_user/rubimine/auto/features/support/chromedriver"
+                                                               Capybara::Selenium::Driver.new(app,
                                        :browser => :chrome,
                                        :desired_capabilities => Selenium::WebDriver::Remote::Capabilities.chrome(
                                            'chromeOptions' => {
