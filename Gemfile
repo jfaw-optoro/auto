@@ -1,4 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'selenium-webdriver', '~> 3.8.0'
-# gem 'page-object', '~> 2.2', '>= 2.2.4'
+gem "cucumber"
+gem "site_prism"
+gem "capybara"
+gem "rspec", "~>3.4.0"
+gem 'pry'
+
