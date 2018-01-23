@@ -3,5 +3,10 @@ Feature: Dock Door
   As a logged in User
   I should be able to scan Dock Door
 
+#  Background:
+    #    Given build some models used in pallet shipping
+
   Scenario: Dock Door scan
-    When I navigate to the login page
+    Given I select the "Pallet Shipping" tool
+    And I select "Loading" on Pallet Shipping
+    When I scan "CSBN120122"
