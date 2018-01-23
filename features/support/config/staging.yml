@@ -1,1 +1,4 @@
+# you can set it to run on other environment using your credentials
 url: "http://snowflake-005.stage.optiturn.com"
+warehouse_admin_user: "bnistor"
+warehouse_admin_password: "Boxever2016"
