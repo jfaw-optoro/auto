@@ -15,7 +15,6 @@ When(/^I login as "(.*?)" using password "(.*?)"$/) do |email, password|
 end
 
 When("I select the {string} tool") do |string|
-  binding.pry
   current_tools = string
   case current_tools
     when 'Receiving'
@@ -61,8 +60,37 @@ When("I select {string} on Pallet Shipping") do |string|
   end
 end
 
-When("I scan {string}") do |string|
-  binding.pry
+When("I scan {string}") do |string_to_scan|
+  page.execute_script(onScanAppBarCodeData("#{string_to_scan}")
+end
+
+
+When("I click the door {string}") do |dock_door_name|
+  on_page("DockDoor::DockDoorPage").click_door(dock_door_name)
   # implement event that scan
   # window.onScanAppBarCodeData('CSBN120122')
+  #find(:xpath, button.md-no-style.md-button.md-ink-ripple).click
+  #find(md-no-style.md-button.md-ink-ripple).click
+  #page.find(button.md-no-style.md-button.md-ink-ripple).click
+  #page.find(:class, '.md-no-style.md-button.md-ink-ripple').click
+  #find(:css, button.md-no-style.md-button.md-ink-ripple).click
+  #click_button('DD-01')
+  #page.execute_script "window.scrollBy(0,10000)"
+  # page.driver.browser.manage.window.resize_to(1024, 768)
+  # binding.pry
+  #Capybara.current_session.current_window.resize_to(1024, 768) (WORKS TOO!!)
+  #page.driver.browser.manage.window.maximize (DOESNT WORK!!)
+  # page.click_button('DD-01')
+  #Capybara.current_session.current_window.resize_to(1024, 768)
+  #page.driver.browser.manage.window.maximize
+  #find(:css, 'DD-01').click_button
+end
+
+Then("I am on {string} page") do |module_name|
+  puts "#{module_name}::#{module_name}Page"
+  visit_page("#{module_name}::#{module_name}Page")
+end
+
+Then("I see the {string} page") do |string|
+  page.assert_text('Select Shipment or Scan Lot')
 end
