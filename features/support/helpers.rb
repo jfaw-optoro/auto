@@ -8,6 +8,12 @@ module PageObjects
     end
   end
 
+  def on_page(name, _args = {}, &block)
+   build_page(name).tap do |page|
+     yield page if block
+   end
+ end
+
   def assert_on_page(name, args = {}, &block)
     build_page(name).tap do |page|
       expect(page).to be_displayed(args)

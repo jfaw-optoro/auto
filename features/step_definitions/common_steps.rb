@@ -15,7 +15,6 @@ When(/^I login as "(.*?)" using password "(.*?)"$/) do |email, password|
 end
 
 When("I select the {string} tool") do |string|
-  binding.pry
   current_tools = string
   case current_tools
     when 'Receiving'
@@ -61,8 +60,23 @@ When("I select {string} on Pallet Shipping") do |string|
   end
 end
 
-When("I scan {string}") do |string|
-  binding.pry
-  # implement event that scan
-  # window.onScanAppBarCodeData('CSBN120122')
+When("I scan {string}") do |string_to_scan|
+  bindig.pry
+  page.execute_script("window.onScanAppBarCodeData('#{string_to_scan}')") # Scanning barcode
+  page.execute_script("window.swipeTrack = false") # swipetrack sounds URL calls
 end
+
+When("I click the door {string}") do |dock_door_name|
+  on_page("PalletLoading::PalletLoadingPage").click_door(dock_door_name)
+end
+
+Then("I am on {string} page") do |module_name|
+  puts "#{module_name}::#{module_name}Page"
+  visit_page("#{module_name}::#{module_name}Page")
+end
+
+When("I click the Shipment Number {string}") do |string|
+  on_page("SelectShipmentScanLotDoor::SelectShipmentScanLotDoorPage").click_shipment(string)
+  binding.pry
+end
+
