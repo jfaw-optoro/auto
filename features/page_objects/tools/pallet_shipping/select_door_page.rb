@@ -1,9 +1,14 @@
 module PageObjects
-  module LoadingSelectDoor
-    class LoadingSelectDoorPage < SitePrism::Page
-      set_url "/pallet_shipping_tool#!/loading/select-door"
+  module SelectShipmentScanLotDoor
+    class SelectShipmentScanLotDoorPage < SitePrism::Page
+      set_url "/pallet_shipping_tool#!/loading/door{/door_name}"
 
-      element :select_door, "*[role=“listitem”] div h3"
+      element :shipment, "*[ng-app='pallet_shipping_tool'] [role='list']"
+
+      def click_shipment(shipment_name)
+        shipment.find("button[aria-label^='#{shipment_name}']").click
+      end
+
     end
   end
 end

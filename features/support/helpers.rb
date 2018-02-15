@@ -10,7 +10,6 @@ module PageObjects
 
   def on_page(name, _args = {}, &block)
    build_page(name).tap do |page|
-     wait_for_readiness
      yield page if block
    end
  end

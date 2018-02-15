@@ -9,8 +9,8 @@ Feature: Dock Door
   Scenario: Dock Door scan
     Given I select the "Pallet Shipping" tool
     And I select "Loading" on Pallet Shipping
-    When I am on "LoadingSelectDoor" page
+
+    When I am on "PalletLoading" page
     And I click the door "DD-01"
-    And I scan "DD-01"   
-    #Then I am on "DockDoor" page
-    Then I see the "DockDoor" page
+    And I click the Shipment Number "BulkOrder 2728263"
+
