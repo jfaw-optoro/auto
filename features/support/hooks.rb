@@ -10,7 +10,7 @@ Before do |feature|
 
   Capybara.app_host = CONFIG['url']
   ## set default max wait and maximize browser
-  Capybara.default_max_wait_time = 60
+  Capybara.default_max_wait_time = 10
 
   @util = Utils.new
   user = CONFIG['warehouse_admin_user']

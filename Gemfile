@@ -1,12 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'selenium-webdriver', '~> 2.53'
-gem "cucumber"
-gem "site_prism"
-gem 'capybara', '~> 2.17'
-gem "rspec", "~>3.4.0"
+gem 'cucumber'
+gem 'site_prism'
+gem 'rspec', '3.4'
 gem 'pry'
 gem 'chromedriver-helper'
 gem 'syntax'
-gem 'poltergeist'
 gem 'rubocop'
+gem 'capybara', '2.7'
+gem 'selenium-webdriver'
+gem 'factory_girl', '~> 4.5'
+gem 'factory_girl_rails', '~> 4.5', require: false
