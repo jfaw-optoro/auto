@@ -1,7 +1,7 @@
 module PageObjects
   module CheckoutTruck
     class CheckoutTruckPage < SitePrism::Page
-      set_url "http://snowflake-005.stage.optiturn.com/pallet_shipping_tool#!/loading/door{/param}/order/OR"
+      set_url "/pallet_shipping_tool#!/loading/door{/param}/order/OR"
 
       element :checkout_truck, "*[aria-label='Check Out Truck']"
 
