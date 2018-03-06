@@ -3,6 +3,7 @@
 require 'fileutils'
 require 'capybara'
 require 'rspec'
+require 'factory_girl_rails'
 class Utils
   include PageObjects
 
@@ -31,5 +32,7 @@ class Utils
     end
     assert_on_page("Tools::ToolsPage")
   end
+
+
 
 end

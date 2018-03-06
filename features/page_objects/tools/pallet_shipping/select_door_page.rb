@@ -1,7 +1,7 @@
 module PageObjects
   module SelectShipmentScanLotDoor
     class SelectShipmentScanLotDoorPage < SitePrism::Page
-      set_url "/pallet_shipping_tool#!/loading/door{/door_name}"
+      set_url "/pallet_shipping_tool#!/loading/door{/param}"
 
       element :shipment, "*[ng-app='pallet_shipping_tool'] [role='list']"
 

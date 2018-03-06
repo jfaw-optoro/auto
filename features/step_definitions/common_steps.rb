@@ -61,22 +61,34 @@ When("I select {string} on Pallet Shipping") do |string|
 end
 
 When("I scan {string}") do |string_to_scan|
-  bindig.pry
-  page.execute_script("window.onScanAppBarCodeData('#{string_to_scan}')") # Scanning barcode
-  page.execute_script("window.swipeTrack = false") # swipetrack sounds URL calls
+  page.execute_script("window.onScanAppBarCodeData('#{string_to_scan}')")
 end
 
-When("I click the door {string}") do |dock_door_name|
+When("I scan {string}") do |string_to_scan|
+  page.execute_script("window.onScanAppBarCodeData('#{string_to_scan}')")
+  puts "Scanned: #{string_to_scan}"
+end
+
+When("I scan lot {string} to door {string}") do |lot_name, door_name|
+  on_page("ScanLotToLoad::ScanLotToLoadPage").scan_lot(lot_name)
+  on_page("LoadItem::LoadItemPage").scan_door(door_name)
+end
+
+When("I select the door {string}") do |dock_door_name|
   on_page("PalletLoading::PalletLoadingPage").click_door(dock_door_name)
 end
 
-Then("I am on {string} page") do |module_name|
+Then("{string} is displayed") do |module_name|
   puts "#{module_name}::#{module_name}Page"
-  visit_page("#{module_name}::#{module_name}Page")
+  assert_on_page("#{module_name}::#{module_name}Page")
+  binding.pry
 end
 
-When("I click the Shipment Number {string}") do |string|
+When("I select the Shipment Number {string}") do |string|
   on_page("SelectShipmentScanLotDoor::SelectShipmentScanLotDoorPage").click_shipment(string)
-  binding.pry
+end
+
+Then("I can checkout door {string}") do |dock_door_name|
+  on_page("CheckoutTruck::CheckoutTruckPage").click_checkout(dock_door_name)
 end
 
