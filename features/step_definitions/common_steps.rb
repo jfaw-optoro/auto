@@ -67,7 +67,9 @@ When("I scan {string}") do |string_to_scan|
 end
 
 When("I click the door {string}") do |dock_door_name|
-  on_page("PalletLoading::PalletLoadingPage").click_door(dock_door_name)
+  on_page("PalletLoading::PalletLoadingPage") do |page|
+    page.find_door(dock_door_name).door_title.click
+  end
 end
 
 Then("I am on {string} page") do |module_name|
@@ -75,8 +77,18 @@ Then("I am on {string} page") do |module_name|
   visit_page("#{module_name}::#{module_name}Page")
 end
 
+When("{string} is part of the active doors list") do |door_name|
+  on_page("PalletLoading::PalletLoadingPage") do |page|
+    expect(page).to have_content("Or Select Door")
+
+    #printing here the output of the active_doors_titles method
+    puts page.active_doors_titles
+    #simple assertion from https://relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    expect(page.active_doors_titles).to include door_name
+  end
+end
+
 When("I click the Shipment Number {string}") do |string|
   on_page("SelectShipmentScanLotDoor::SelectShipmentScanLotDoorPage").click_shipment(string)
-  binding.pry
 end
 

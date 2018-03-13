@@ -11,6 +11,7 @@ Feature: Dock Door
     And I select "Loading" on Pallet Shipping
 
     When I am on "PalletLoading" page
-    And I click the door "DD-01"
-    And I click the Shipment Number "BulkOrder 2728263"
+    And "DD-01" is part of the active doors list
+#    And I click the door "DD-01"
+#    And I click the Shipment Number "BulkOrder 2728263"
 
