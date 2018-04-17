@@ -92,3 +92,8 @@ Then("I can checkout door {string}") do |dock_door_name|
   on_page("CheckoutTruck::CheckoutTruckPage").click_checkout(dock_door_name)
 end
 
+Given("I open a page for {string}") do |door_name|
+  visit_page("SelectShipmentScanLotDoor::SelectShipmentScanLotDoorPage", param: door_name)
+  binding.pry
+end
+
